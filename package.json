@@ -1,6 +1,6 @@
 {
   "name": "kefir-contrib-run",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Additional functions for running Kefir observables to completion.",
   "main": "lib/run.js",
   "scripts": {
