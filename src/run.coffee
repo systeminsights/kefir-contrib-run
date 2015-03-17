@@ -24,7 +24,10 @@ last = (obs) ->
   #     asynchronously as, if the observable has a current value or error,
   #     it invokes on* callbacks synchronously.
   B.resolve(obs.reduce(((_, v) -> Some(v)), None).endOnError())
-    .then((obs1) -> new B((res, rej) -> obs1.onValue(res).onError(rej)))
+    .then((obs1) ->
+      new B((res, rej) ->
+        done = false
+        obs1.onError(rej).onValue(res).onEnd(-> res(None) unless done)))
 
 # :: Kefir e a -> Promise _ [Either e a]
 #

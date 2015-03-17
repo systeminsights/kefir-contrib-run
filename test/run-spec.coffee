@@ -15,6 +15,9 @@ describe "head", ->
   it "should resolve the promise with None when nothing emitted", ->
     expect(head(K.never())).to.become(None)
 
+  it "should reject promise when only error", ->
+    expect(head(K.constantError("E"))).to.be.rejected
+
 describe "last", ->
   abc = -> K.sequentially(10, ["A", "B", "C"])
 
@@ -22,10 +25,14 @@ describe "last", ->
     expect(last(abc())).to.become(Some("C"))
 
   it "should reject the promise with the first error", ->
-    expect(last(abc().valuesToErrors())).to.be.rejected.and.become("A")
+    s = -> K.concat([abc(), K.constantError("E"), abc()])
+    expect(last(s())).to.be.rejected.and.become("E")
 
   it "should resolve the promise with None when nothing emitted", ->
     expect(last(K.never())).to.become(None)
+
+  it "should reject promise when only error", ->
+    expect(head(K.constantError("E"))).to.be.rejected
 
 describe "runLog", ->
   it "should return a promise that resolves with an array of all emitted errors and values", ->
