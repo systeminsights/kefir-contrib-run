@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "bluebird": "^2.9.13",
-    "fantasy-contrib-either": "0.0.1",
+    "fantasy-contrib-either": "0.0.2",
     "fantasy-options": "0.0.1",
     "kefir-contrib-fantasy": "0.0.1",
     "ramda": "^0.11.0"
